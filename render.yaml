@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: featureflags-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: MONGO_URI
+        fromDatabase:
+          name: featureflags_db
+          property: connectionString
+      - key: REDIS_URL
+      - key: SERVICE_TOKEN
+      - key: JWT_SECRET
+      - key: CACHE_TTL_SECONDS
+        value: "60"
