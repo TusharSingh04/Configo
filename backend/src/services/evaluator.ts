@@ -1,5 +1,5 @@
-import { EnvConfig, Environment, FlagDoc, VariantOption } from '../models/Flag';
-import { deterministicHash } from '../utils/hash';
+import { EnvConfig, Environment, FlagDoc, VariantOption } from '../models/Flag.js';
+import { deterministicHash } from '../utils/hash.js';
 
 export interface EvaluationContext { [key: string]: string | number | boolean | null | undefined; }
 

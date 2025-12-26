@@ -1,5 +1,5 @@
-import { evaluateFlag } from '../services/evaluator.ts';
-import { FlagDoc } from '../models/Flag.ts';
+import { evaluateFlag } from '../services/evaluator.js';
+import { FlagDoc } from '../models/Flag.js';
 
 const flag: FlagDoc = {
   key: 'new-ui',

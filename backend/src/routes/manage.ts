@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { requireRole } from '../auth/userAuth';
-import { wrap } from '../utils/errors';
-import { upsertFlag, listFlags, rollbackFlag, getFlagByKey } from '../services/flagService';
+import { requireRole } from '../auth/userAuth.js';
+import { wrap } from '../utils/errors.js';
+import { upsertFlag, listFlags, rollbackFlag, getFlagByKey } from '../services/flagService.js';
 
 const router = Router();
 

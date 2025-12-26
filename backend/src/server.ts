@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import { config } from './config';
-import evalRoutes from './routes/eval';
-import manageRoutes from './routes/manage';
-import { ApiError } from './utils/errors';
+import { config } from './config.js';
+import evalRoutes from './routes/eval.js';
+import manageRoutes from './routes/manage.js';
+import { ApiError } from './utils/errors.js';
 
 const app = express();
 app.use(cors());

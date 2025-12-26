@@ -1,7 +1,7 @@
 import { MongoClient, Db, Collection } from 'mongodb';
-import { config } from '../config';
-import { FlagDoc } from '../models/Flag';
-import { AuditLogDoc } from '../models/AuditLog';
+import { config } from '../config.js';
+import { FlagDoc } from '../models/Flag.js';
+import { AuditLogDoc } from '../models/AuditLog.js';
 
 let client: MongoClient | null = null;
 let db: Db | null = null;

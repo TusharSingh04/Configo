@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export type FlagFormValue = {
   key: string;
@@ -16,6 +16,20 @@ export function FlagForm({ initial, onSubmit }: { initial?: Partial<FlagFormValu
     { env: 'staging', defaultValue: false },
     { env: 'prod', defaultValue: false },
   ]);
+
+  // Sync form state when initial prop changes (e.g., after rollback)
+  useEffect(() => {
+    if (initial) {
+      setKey(initial.key || '');
+      setType(initial.type || 'boolean');
+      setDescription(initial.description || '');
+      setEnvs(initial.envs || [
+        { env: 'dev', defaultValue: false },
+        { env: 'staging', defaultValue: false },
+        { env: 'prod', defaultValue: false },
+      ]);
+    }
+  }, [initial]);
 
   return (
     <form onSubmit={e => { e.preventDefault(); onSubmit({ key, type, envs, description }); }}>

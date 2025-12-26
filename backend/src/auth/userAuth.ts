@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { config } from '../config';
-import { ApiError } from '../utils/errors';
+import { config } from '../config.js';
+import { ApiError } from '../utils/errors.js';
 
 export interface UserClaims { sub: string; role: 'admin' | 'viewer'; }
 

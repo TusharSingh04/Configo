@@ -16,3 +16,13 @@ services:
       - key: JWT_SECRET
       - key: CACHE_TTL_SECONDS
         value: "60"
+
+  - type: web
+    name: featureflags-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://featureflags-backend.onrender.com

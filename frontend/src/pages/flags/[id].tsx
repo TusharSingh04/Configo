@@ -22,7 +22,8 @@ export default function EditFlag() {
       <form onSubmit={async (e) => {
         e.preventDefault();
         const to = Number((e.target as any).version.value);
-        await manage.rollback(id, to);
+        const rolled = await manage.rollback(id, to);
+        setInitial(rolled);
         alert('Rolled back');
       }}>
         <label>Version to rollback to: <input name="version" type="number" /></label>

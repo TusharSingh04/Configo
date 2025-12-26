@@ -1,6 +1,6 @@
-import { getFlagsCollection, getAuditCollection } from '../db/mongo';
-import { FlagDoc } from '../models/Flag';
-import { AuditLogDoc } from '../models/AuditLog';
+import { getFlagsCollection, getAuditCollection } from '../db/mongo.js';
+import { FlagDoc } from '../models/Flag.js';
+import { AuditLogDoc } from '../models/AuditLog.js';
 
 export async function getFlagByKey(key: string): Promise<FlagDoc | null> {
   const col = await getFlagsCollection();
@@ -33,7 +33,8 @@ export async function rollbackFlag(actor: string, key: string, toVersion: number
   const entry = await audit.findOne({ entityType: 'flag', entityId: key, action: { $in: ['create', 'update'] }, 'data.version': toVersion });
   if (!entry || typeof entry.data !== 'object') return null;
   const snapshot = entry.data as FlagDoc;
-  const next: FlagDoc = { ...snapshot, updatedAt: Date.now(), updatedBy: actor, version: snapshot.version + 1 };
+  // Apply snapshot values but set the displayed version to the target version
+  const next: FlagDoc = { ...snapshot, updatedAt: Date.now(), updatedBy: actor, version: toVersion };
   await col.updateOne({ key }, { $set: next }, { upsert: true });
   await appendAudit({ ts: Date.now(), actor, entityType: 'flag', entityId: key, action: 'rollback', data: { toVersion, appliedVersion: next.version } });
   return next;

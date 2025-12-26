@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { cacheGet, cacheSet } from '../db/redis';
-import { config } from '../config';
-import { getFlagsCollection } from '../db/mongo';
-import { FlagDoc, Environment } from '../models/Flag';
-import { evaluateFlag, EvaluationContext } from '../services/evaluator';
-import { requireServiceToken } from '../auth/serviceAuth';
-import { wrap } from '../utils/errors';
+import { cacheGet, cacheSet } from '../db/redis.js';
+import { config } from '../config.js';
+import { getFlagsCollection } from '../db/mongo.js';
+import { FlagDoc, Environment } from '../models/Flag.js';
+import { evaluateFlag, EvaluationContext } from '../services/evaluator.js';
+import { requireServiceToken } from '../auth/serviceAuth.js';
+import { wrap } from '../utils/errors.js';
 
 const router = Router();
 router.use(requireServiceToken);

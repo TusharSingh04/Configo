@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { config } from '../config';
-import { ApiError } from '../utils/errors';
+import { config } from '../config.js';
+import { ApiError } from '../utils/errors.js';
 
 export function requireServiceToken(req: Request, _res: Response, next: NextFunction) {
   const auth = req.headers['authorization'] || '';
