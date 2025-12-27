@@ -2,6 +2,7 @@ import { MongoClient, Db, Collection } from 'mongodb';
 import { config } from '../config.js';
 import { FlagDoc } from '../models/Flag.js';
 import { AuditLogDoc } from '../models/AuditLog.js';
+import { UserDoc } from '../models/User.js';
 
 let client: MongoClient | null = null;
 let db: Db | null = null;
@@ -36,5 +37,13 @@ export async function getAuditCollection(): Promise<Collection<AuditLogDoc>> {
   const col = database.collection<AuditLogDoc>('audit_logs');
   await col.createIndex({ ts: -1 });
   await col.createIndex({ entityType: 1, entityId: 1, ts: -1 });
+  return col;
+}
+
+export async function getUsersCollection(): Promise<Collection<UserDoc>> {
+  const database = await getDb();
+  const col = database.collection<UserDoc>('users');
+  await col.createIndex({ email: 1 }, { unique: true });
+  await col.createIndex({ role: 1 });
   return col;
 }

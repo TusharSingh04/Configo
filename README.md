@@ -54,6 +54,62 @@ Frontend runs on `http://localhost:3000`.
 
 ---
 
+## Production-Ready Features
+
+### ✓ Authentication & RBAC
+
+- **Role-Based Access Control (RBAC):** Admin, Editor, Viewer roles with granular permission system
+- **Google OAuth 2.0:** Single sign-on integration
+- **Email/Password Auth:** Password hashing using PBKDF2 (100k iterations)
+- **JWT Tokens:** 7-day expiry with refresh capability
+- **User Approval Workflow:** New users pending admin approval before access
+
+**Permissions:**
+- `admin`: All operations (flag:read, flag:write, user:manage, audit:read)
+- `editor`: Create and manage flags (flag:read, flag:write)
+- `viewer`: Read-only access to flags (flag:read)
+
+### ✓ Security & Monitoring
+
+- **Rate Limiting:**
+  - Login/Signup: 5 requests per 5 minutes
+  - General API: 100 requests per 15 minutes
+- **Structured Logging:** Winston logger with file rotation, error tracking
+- **Audit Logs:** Complete history of all user actions and flag changes
+- **Encrypted Passwords:** PBKDF2 with per-user salt
+
+### ✓ Email Notifications
+
+- User approval/rejection emails
+- Flag change notifications (optional)
+- Configurable SMTP or SendGrid integration
+
+### ✓ API Documentation
+
+- **Swagger/OpenAPI:** Full API docs at `/api-docs`
+- **Interactive Testing:** Try requests directly from Swagger UI
+- **Complete Coverage:** All endpoints documented with examples
+
+### ✓ Testing Infrastructure
+
+- **Unit Tests:** Auth, RBAC, password hashing with Jest
+- **Coverage Reporting:** Target 70%+ coverage
+- **Test Commands:**
+  ```powershell
+  npm run test              # Run all tests
+  npm run test:watch       # Run in watch mode
+  npm run test:coverage    # Generate coverage report
+  ```
+
+---
+
+## Documentation
+
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** — Complete deployment guide with Docker, Kubernetes, and SSL setup
+- **[TESTING.md](TESTING.md)** — Testing strategies, mocking external services, CI/CD setup
+
+---
+
 ## Core Concepts
 
 ### Feature Flag Types

@@ -17,3 +17,19 @@ export const manage = {
   updateFlag: (key: string, flag: any) => api(`/api/manage/flags/${key}`, { method: 'PUT', body: JSON.stringify(flag) }),
   rollback: (key: string, toVersion: number) => api(`/api/manage/flags/${key}/rollback`, { method: 'POST', body: JSON.stringify({ toVersion }) }),
 };
+
+export const auth = {
+  login: (email: string, password: string) => api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
+  signup: (email: string, password: string, requestedRole?: string) => api('/api/auth/signup', { method: 'POST', body: JSON.stringify({ email, password, requestedRole }) }),
+  googleSignIn: (idToken: string) => api('/api/auth/google', { method: 'POST', body: JSON.stringify({ idToken }) }),
+  me: () => api('/api/auth/me'),
+};
+
+export const admin = {
+  listPendingUsers: () => api('/api/auth/users/pending'),
+  listAllUsers: () => api('/api/auth/users'),
+  approveUser: (userId: string, approve: boolean, role: string) => api(`/api/auth/users/${userId}/approve`, { 
+    method: 'POST', 
+    body: JSON.stringify({ approve, role }) 
+  }),
+};
